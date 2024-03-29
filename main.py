@@ -1,10 +1,9 @@
-# TODO add validation for currency input
 from plot import parse_ecb_exchange_rates, plot_exchange_rates
-from scrapper import get_list_of_currencies, save_xml
+from scrapper import get_dict_of_currencies, save_xml
 
 
 def main():
-    currencies = get_list_of_currencies()
+    currencies = get_dict_of_currencies()
     print("List of available currencies:")
     for key, value in currencies.items():
         print(f"{key}: {value}")
@@ -18,7 +17,10 @@ def main():
 
     df_monthly_max, df_monthly_min, df_monthly_mean = parse_ecb_exchange_rates(filename)
     plot_exchange_rates(
-        max=df_monthly_max, min=df_monthly_min, mean=df_monthly_mean, currency=currency
+        maximum=df_monthly_max,
+        minimum=df_monthly_min,
+        mean=df_monthly_mean,
+        currency=currency,
     )
 
 

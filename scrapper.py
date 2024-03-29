@@ -3,7 +3,7 @@ import os
 from lxml import etree
 
 
-def save_xml(currency):
+def save_xml(currency: str) -> None:
     # check if folder exists
     folder = "currency"
     if not os.path.exists(folder):
@@ -20,7 +20,7 @@ def save_xml(currency):
         print("Error while downloading XML file")
 
 
-def get_list_of_currencies():
+def get_dict_of_currencies() -> dict:
     url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
 
     response = requests.get(url)

@@ -1,9 +1,12 @@
 import xml.etree.ElementTree as ET
+from typing import Tuple
+
 import pandas as pd
 import plotly.graph_objs as go
+from pandas import DataFrame
 
 
-def parse_ecb_exchange_rates(filename):
+def parse_ecb_exchange_rates(filename: str) -> Tuple[DataFrame, DataFrame, DataFrame]:
     tree = ET.parse(filename)
 
     root = tree.getroot()
@@ -36,14 +39,16 @@ def parse_ecb_exchange_rates(filename):
     return df_monthly_max, df_monthly_min, df_monthly_mean
 
 
-def plot_exchange_rates(max, min, mean, currency, y_ticks=None):
+def plot_exchange_rates(
+    maximum: DataFrame, minimum: DataFrame, mean: DataFrame, currency: str, y_ticks=None
+):
     fig = go.Figure()
 
     # Add trace for Max Exchange Rate
     fig.add_trace(
         go.Scatter(
-            x=max["Date"],
-            y=max["ExchangeRate"],
+            x=maximum["Date"],
+            y=maximum["ExchangeRate"],
             mode="markers+lines",
             name="Max Exchange Rate",
             marker=dict(color="green"),
@@ -53,8 +58,8 @@ def plot_exchange_rates(max, min, mean, currency, y_ticks=None):
     # Add trace for Min Exchange Rate
     fig.add_trace(
         go.Scatter(
-            x=min["Date"],
-            y=min["ExchangeRate"],
+            x=minimum["Date"],
+            y=minimum["ExchangeRate"],
             mode="markers+lines",
             name="Min Exchange Rate",
             marker=dict(color="red"),
