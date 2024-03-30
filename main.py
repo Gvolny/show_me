@@ -1,3 +1,4 @@
+# TODO arg parser for run flags - python main.py --currensy pln
 from plot import parse_ecb_exchange_rates, plot_exchange_rates
 from scrapper import get_dict_of_currencies, save_xml
 

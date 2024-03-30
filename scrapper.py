@@ -26,12 +26,11 @@ def get_dict_of_currencies() -> dict:
     response = requests.get(url)
     if response.status_code == 200:
         root = etree.HTML(response.content)
-        currencies = root.xpath('//table[@class="forextable"]//a[@href]/text()')
+        currencies = root.xpath('//table[@class="forextable"]//tr')[1:]
 
-        while "\n" in currencies:
-            currencies.remove("\n")
         currency_dict = {
-            currencies[i]: currencies[i + 1] for i in range(0, len(currencies), 2)
+            i.xpath("./td[1]//text()")[0]: i.xpath("./td[2]//text()")[0]
+            for i in currencies
         }
         return currency_dict
 
