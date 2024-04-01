@@ -1,4 +1,4 @@
-# Show Me Exchange Rates
+# Show Me
 
 This application downloads and plots exchange rates for different currencies from the European Central Bank (ECB) website.
 
@@ -9,12 +9,10 @@ This application downloads and plots exchange rates for different currencies fro
 
 ## Installation
 
-1. Clone the repository: git clone https://github.com/Gvolny/show_me.git
-
-2. Navigate to the project directory: cd show_me
-3. Install the required packages: pipenv install
-
-4. Activate the virtual environment:pipenv shell
+1. Clone the repository: 'git clone https://github.com/Gvolny/show_me.git'
+2. Navigate to the project directory: 'cd show_me'
+3. Install the required packages: 'pipenv install'
+4. Activate the virtual environment: 'pipenv shell'
 
 
 ## Usage
