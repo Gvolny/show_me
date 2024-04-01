@@ -2,17 +2,16 @@ import requests
 import os
 from lxml import etree
 
+CEB_URL = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/"
+
+CURRENCY_FOLDER = "currency"
+
 
 def save_xml(currency: str) -> None:
-    # check if folder exists
-    folder = "currency"
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+    os.makedirs(CURRENCY_FOLDER, exist_ok=True)
+    file_path = os.path.join(CURRENCY_FOLDER, f"{currency}.xml")
 
-    file_path = f"{folder}/{currency}.xml"
-    response = requests.get(
-        f"https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/{currency}.xml"
-    )
+    response = requests.get(f"{CEB_URL}{currency}.xml")
     if response.status_code == 200:
         with open(file_path, "wb") as f:
             f.write(response.content)
@@ -21,7 +20,7 @@ def save_xml(currency: str) -> None:
 
 
 def get_dict_of_currencies() -> dict:
-    url = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+    url = f"{CEB_URL}/index.en.html"
 
     response = requests.get(url)
     if response.status_code == 200:

@@ -5,7 +5,7 @@ from scrapper import get_dict_of_currencies, save_xml
 
 def main():
     currencies = get_dict_of_currencies()
-    print("List of available currencies:")
+    print("That app can download and plot exchange rates for the following currencies:")
     for key, value in currencies.items():
         print(f"{key}: {value}")
     currency = input("Enter currency: ").lower()
