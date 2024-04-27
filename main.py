@@ -5,10 +5,10 @@ from scrapper import get_dict_of_currencies, save_xml
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Download and plot exchange rates for a specific currency"
+        description="Download and plot exchange rates for a specific currency from European Central Bank (ECB)."
     )
     parser.add_argument(
-        "--currency", "-c", help='Currency code (e.g., "pln", "usd", "eur")'
+        "--currency", "-c", help='Currency code (e.g., "usd", "pln", "jpy")'
     )
     return parser.parse_args()
 
