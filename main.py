@@ -1,6 +1,7 @@
 import argparse
 from plot import parse_ecb_exchange_rates, plot_exchange_rates
 from scrapper import get_dict_of_currencies, save_xml
+from utils import print_available_currencies
 
 
 def parse_args():
@@ -8,7 +9,12 @@ def parse_args():
         description="Download and plot exchange rates for a specific currency from European Central Bank (ECB)."
     )
     parser.add_argument(
-        "--currency", "-c", help='Currency code (e.g., "usd", "pln", "jpy")'
+        "--currency",
+        "-c",
+        help='Plot exchange rates for a specific currency (e.g., "usd", "pln", "jpy")',
+    )
+    parser.add_argument(
+        "--list", "-l", action="store_true", help="List of available currencies"
     )
     return parser.parse_args()
 
@@ -18,17 +24,14 @@ def main():
 
     if args.currency:
         currency = args.currency.lower()
-        currencies = None
+    elif args.list:
+        print_available_currencies()
+        return
     else:
-        currencies = get_dict_of_currencies()
-        print(
-            "This app can download and plot exchange rates for the following currencies:"
-        )
-        for key, value in currencies.items():
-            print(f"{key}: {value}")
+        print_available_currencies()
         currency = input("Enter currency: ").lower()
 
-    currency_list = list(currencies.keys()) if currencies else None
+    currency_list = get_dict_of_currencies()
     if currency_list and currency.upper() not in currency_list:
         print("Invalid currency input. Please try again.")
         return
